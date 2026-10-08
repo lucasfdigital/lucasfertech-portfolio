@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucas Fernandes — Desenvolvedor Full Stack</title>
+  <meta name="description" content="Portfólio de Lucas Fernandes inspirado no estilo Velara AI: dark fintech, dashboard preview, features, pricing e contato." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Video-background effect (CSS animado, estilo Velara) -->
+  <div class="video-bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="grid-overlay"></div></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#inicio" class="logo"><span class="logo-mark">◆</span> lucasfer<span>.tech</span></a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#servicos">Serviços</a>
+        <a href="#skills">Skills</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#planos">Planos</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://github.com/lucasfdigital" target="_blank" rel="noopener" class="nav-ghost">GitHub ↗</a>
+        <a href="#contato" class="btn btn-sm">Contrate-me</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO estilo Velara: texto + balance-preview dashboard -->
+  <section id="inicio" class="hero container">
+    <div class="hero-text">
+      <p class="badge"><span class="dot"></span> Disponível para projetos • inspirado em Velara AI</p>
+      <h1>Shippo produtos <br /><span class="gradient">como quem cuida</span> de budget.</h1>
+      <p class="subtitle">Sou <strong>Lucas Fernandes</strong>, full stack em <strong>React, Next.js, Node, Python</strong> e <strong>Mobile</strong>. Previsibilidade de fintech, velocidade de startup: escopo claro, entrega contínua e código que você entende.</p>
+      <div class="hero-btns">
+        <a href="#projetos" class="btn btn-primary">Ver dashboard de projetos →</a>
+        <a href="#contato" class="btn btn-ghost">↓ Baixar CV / Contato</a>
+      </div>
+      <div class="hero-proof">
+        <div class="avatars"><i>LF</i><i>◆</i><i>▲</i><i>●</i></div>
+        <p><strong>20+ projetos</strong> entregues • <strong>4.9/5</strong> avaliação média</p>
+      </div>
+    </div>
+
+    <div class="dash">
+      <div class="dash-head">
+        <div><p class="dash-label">Total entregue</p><h2 id="balance">R$ 0</h2><p class="dash-up">▲ +18.2% este ano</p></div>
+        <div class="dash-toggle"><button class="active">2026</button><button>2025</button></div>
+      </div>
+      <div class="chart" id="chart">
+        <div style="--h:38%"></div><div style="--h:55%"></div><div style="--h:42%"></div><div style="--h:68%"></div><div style="--h:52%"></div><div style="--h:80%"></div><div style="--h:64%"></div><div style="--h:92%"></div><div style="--h:74%"></div><div style="--h:100%"></div><div style="--h:86%"></div><div style="--h:95%"></div>
+      </div>
+      <div class="dash-list">
+        <div class="d-row"><span class="d-ico">⚛️</span><div><strong>E-commerce Headless</strong><p>Next.js • Stripe • há 2 dias</p></div><b class="pos">+ merged</b></div>
+        <div class="d-row"><span class="d-ico">🐍</span><div><strong>API FastAPI + IA</strong><p>Python • OpenAI • há 5 dias</p></div><b class="pos">+ deployed</b></div>
+        <div class="d-row"><span class="d-ico">📱</span><div><strong>App Delivery</strong><p>React Native • há 1 sem</p></div><b class="pos">+ released</b></div>
+      </div>
+      <div class="dash-insight">🤖 <strong>Smart insight:</strong> seus deploys na <strong>Vercel + Docker</strong> cortariam ~32% do custo atual. <a href="#contato">Falar comigo →</a></div>
+    </div>
+  </section>
+
+  <!-- LOGOS -->
+  <div class="container logos">
+    <span>REACT</span><span>NEXT.JS</span><span>TYPESCRIPT</span><span>NODE</span><span>PYTHON</span><span>POSTGRES</span><span>FLUTTER</span><span>DOCKER</span>
+  </div>
+
+  <!-- FEATURES estilo smart-insight cards -->
+  <section id="servicos" class="section container reveal">
+    <p class="section-tag">// smart insights</p>
+    <h2 class="section-title">Tudo que um <span class="gradient">budget tracker</span> faz.<br/>Mas com código.</h2>
+    <div class="features">
+      <div class="feat"><h3>📊 Balance-preview de projeto</h3><p>Escopo, prazo e custo visíveis desde o dia 1. Sem surpresa no fim do mês.</p><span>Estimativa em 24h →</span></div>
+      <div class="feat"><h3>🤖 Insights automáticos</h3><p>Code review, performance e SEO monitorados como se fossem gastos: alerta antes de estourar.</p><span>Lighthouse 95+ →</span></div>
+      <div class="feat"><h3>🗂️ Category breakdown</h3><p>Front, back, mobile e infra separados por categoria, com progresso semanal.</p><span>Ver breakdown →</span></div>
+      <div class="feat"><h3>⚡ Realtime deploys</h3><p>Preview a cada commit. Você acompanha como extrato bancário: entrou, testou, publicou.</p><span>CI/CD incluso →</span></div>
+    </div>
+  </section>
+
+  <!-- SKILLS breakdown estilo categorias -->
+  <section id="skills" class="section container reveal">
+    <p class="section-tag">// category breakdown</p>
+    <h2 class="section-title">Onde vai <span class="gradient">cada hora</span></h2>
+    <div class="break-grid">
+      <div class="break-card">
+        <h3>Frontend — 40%</h3>
+        <div class="donut-row"><div class="donut" style="--p:90"></div><div class="tags"><span>React</span><span>Next.js</span><span>TypeScript</span><span>Tailwind</span></div></div>
+        <div class="bar"><div class="track"><div class="fill" style="--w:90%"></div></div></div>
+      </div>
+      <div class="break-card">
+        <h3>Backend & APIs — 35%</h3>
+        <div class="donut-row"><div class="donut" style="--p:85"></div><div class="tags"><span>Node.js</span><span>Python</span><span>FastAPI</span><span>Postgres</span></div></div>
+        <div class="bar"><div class="track"><div class="fill" style="--w:85%"></div></div></div>
+      </div>
+      <div class="break-card">
+        <h3>Mobile & Cloud — 25%</h3>
+        <div class="donut-row"><div class="donut" style="--p:78"></div><div class="tags"><span>React Native</span><span>Flutter</span><span>Docker</span><span>AWS</span></div></div>
+        <div class="bar"><div class="track"><div class="fill" style="--w:78%"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section id="projetos" class="section container reveal">
+    <p class="section-tag">// recent transactions = projetos</p>
+    <h2 class="section-title">Extrato de <span class="gradient">entregas</span></h2>
+    <div class="projects-grid">
+      <article class="project"><div class="project-top"><span>🛒</span><a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">Code ↗</a></div><h3>E-commerce Headless</h3><p>Next.js + Stripe, 98 Lighthouse, checkout 1-clique.</p><div class="tags small"><span>Next.js</span><span>Stripe</span></div></article>
+      <article class="project"><div class="project-top"><span>📊</span><a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">Code ↗</a></div><h3>Dashboard SaaS</h3><p>React + FastAPI realtime, gráficos e export CSV/PDF.</p><div class="tags small"><span>React</span><span>Python</span></div></article>
+      <article class="project"><div class="project-top"><span>📱</span><a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">Code ↗</a></div><h3>App Delivery</h3><p>Rastreio realtime, push e pagamento integrado.</p><div class="tags small"><span>React Native</span><span>Node</span></div></article>
+      <article class="project"><div class="project-top"><span>🤖</span><a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">Code ↗</a></div><h3>API + IA</h3><p>Node/Python + OpenAI: chatbot, resumos e automação.</p><div class="tags small"><span>OpenAI</span><span>Docker</span></div></article>
+      <article class="project"><div class="project-top"><span>💬</span><a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">Code ↗</a></div><h3>Chat Realtime</h3><p>Salas, Socket.io, upload e presença online.</p><div class="tags small"><span>Socket.io</span><span>Redis</span></div></article>
+      <article class="project"><div class="project-top"><span>🌐</span><a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">Code ↗</a></div><h3>Landing + Blog</h3><p>SEO 100, i18n, MDX e CMS headless.</p><div class="tags small"><span>Next.js</span><span>SEO</span></div></article>
+    </div>
+  </section>
+
+  <!-- PRICING com toggle mensal/projeto estilo Velara -->
+  <section id="planos" class="section container reveal">
+    <p class="section-tag">// pricing tiers</p>
+    <h2 class="section-title">Planos <span class="gradient">claros</span>, sem letra miúda</h2>
+    <div class="toggle-wrap">
+      <button id="btnProj" class="toggle-btn active">Por projeto</button>
+      <button id="btnMensal" class="toggle-btn">Mensal / recorrente</button>
+    </div>
+    <div class="pricing">
+      <div class="price-card"><h3>Landing</h3><p class="price" data-proj="R$ 1.9k" data-mensal="R$ 990/mês">R$ 1.9k</p><ul><li>✔ 1 página + blog</li><li>✔ SEO + Analytics</li><li>✔ Entrega em 7 dias</li></ul><a href="#contato" class="btn btn-ghost">Escolher</a></div>
+      <div class="price-card hot"><p class="hot-tag">MAIS PEDIDO</p><h3>MVP / SaaS</h3><p class="price" data-proj="R$ 6.9k" data-mensal="R$ 3.9k/mês">R$ 6.9k</p><ul><li>✔ Front + API + Auth + DB</li><li>✔ Deploy + CI/CD</li><li>✔ 30 dias de suporte</li></ul><a href="#contato" class="btn btn-primary">Escolher</a></div>
+      <div class="price-card"><h3>App Mobile</h3><p class="price" data-proj="R$ 9.9k" data-mensal="R$ 4.9k/mês">R$ 9.9k</p><ul><li>✔ iOS + Android</li><li>✔ Push + Pagamentos</li><li>✔ Publicação nas lojas</li></ul><a href="#contato" class="btn btn-ghost">Escolher</a></div>
+    </div>
+    <p class="section-sub center">Valores de referência — me chama que eu monto proposta fechada em 24h.</p>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section container reveal">
+    <p class="section-tag">// testimonials</p>
+    <h2 class="section-title">Quem já <span class="gradient">investiu</span></h2>
+    <div class="testis">
+      <div class="testi"><p>“O Lucas organizou nosso MVP como um dashboard financeiro: sabíamos cada entrega da semana.”</p><strong>— Founder SaaS</strong></div>
+      <div class="testi"><p>“Performance absurda. Nossa landing foi de 54 pra 98 no PageSpeed em 1 semana.”</p><strong>— E-commerce</strong></div>
+      <div class="testi"><p>“Comunicação clara e código limpo. Virou nosso dev recorrente.”</p><strong>— Startup Mobile</strong></div>
+    </div>
+  </section>
+
+  <!-- FAQ accordion estilo Velara -->
+  <section id="faq" class="section container reveal">
+    <p class="section-tag">// faq accordion</p>
+    <h2 class="section-title">Perguntas <span class="gradient">frequentes</span></h2>
+    <div class="faq">
+      <details open><summary>Você usa templates do Jiro / Velara?</summary><p>Não copiei código deles — esse layout é <em>inspirado</em> no Velara AI (hero dashboard, pricing toggle, FAQ), mas todo o HTML/CSS/JS aqui é original e free.</p></details>
+      <details><summary>Qual prazo médio?</summary><p>Landing: 7 dias. MVP SaaS: 3–5 semanas. App: 5–8 semanas, com entregas semanais.</p></details>
+      <details><summary>Como funciona o pagamento?</summary><p>50% entrada + 50% na entrega, ou mensal recorrente com pausa quando quiser.</p></details>
+      <details><summary>Você dá suporte pós-entrega?</summary><p>Sim, 30 dias inclusos em MVPs e planos mensais com SLA de 24h.</p></details>
+    </div>
+  </section>
+
+  <!-- CTA download estilo Velara -->
+  <section id="contato" class="section container reveal">
+    <div class="contact-box">
+      <div>
+        <p class="section-tag" style="color:#6ee7b7">// download CTA</p>
+        <h2 class="section-title">Baixe meu CV ou <span class="gradient">vamos conversar?</span></h2>
+        <p class="section-sub">Freelas, CLT remota ou parceria. Respondo em 24h.</p>
+        <div class="hero-btns">
+          <a class="btn btn-primary" href="mailto:contato@lucasfernandes.dev">contato@lucasfernandes.dev</a>
+          <a class="btn btn-ghost" href="#" onclick="alert('Adicione seu CV em ./cv.pdf');return false;">↓ Baixar CV</a>
+        </div>
+        <p class="social-line">Me ache em: <a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">GitHub</a> • <a href="https://www.linkedin.com/in/lucasfia/" target="_blank" rel="noopener">LinkedIn</a> • <a href="https://x.com/lucasfertech" target="_blank" rel="noopener">X</a> • <a href="https://www.instagram.com/lucasfer.tech/" target="_blank" rel="noopener">Instagram</a></p>
+      </div>
+      <form class="contact-form" onsubmit="return sendMail(event)">
+        <input id="fName" required placeholder="Seu nome" />
+        <input id="fEmail" required type="email" placeholder="Seu email" />
+        <select id="fType"><option>Tipo: MVP / SaaS</option><option>Landing page</option><option>App mobile</option><option>Mensal recorrente</option></select>
+        <textarea id="fMsg" required rows="4" placeholder="Conte budget + prazo..."></textarea>
+        <button class="btn btn-primary" type="submit">Enviar →</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Lucas Fernandes • estilo inspirado em Velara AI (código original, sem cópia do Jiro)</p>
+      <div class="footer-links"><a href="https://github.com/lucasfdigital" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/lucasfia/" target="_blank" rel="noopener">LinkedIn</a><a href="https://x.com/lucasfertech" target="_blank" rel="noopener">X</a><a href="https://www.instagram.com/lucasfer.tech/" target="_blank" rel="noopener">Instagram</a><a href="#inicio">Topo ↑</a></div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
