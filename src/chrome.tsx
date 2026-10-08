@@ -7,12 +7,12 @@ import { Marker, Reveal } from "./App";
 
 export type NavKey = "home" | "portfolio" | "ferramentas" | "blog" | "contato";
 
-const NAV: { key: NavKey; label: string; href: string }[] = [
-  { key: "home", label: "Início", href: "#/" },
-  { key: "portfolio", label: "Portfólio", href: "#/portfolio" },
-  { key: "ferramentas", label: "Ferramentas", href: "#/ferramentas" },
-  { key: "blog", label: "Blog", href: "#/blog" },
-  { key: "contato", label: "Contato", href: "#/contato" },
+const NAV: { key: NavKey; label: string; href: string; num: string }[] = [
+  { key: "home", label: "Início", href: "#/", num: "01" },
+  { key: "portfolio", label: "Portfólio", href: "#/portfolio", num: "02" },
+  { key: "ferramentas", label: "Ferramentas", href: "#/ferramentas", num: "03" },
+  { key: "blog", label: "Blog", href: "#/blog", num: "04" },
+  { key: "contato", label: "Contato", href: "#/contato", num: "05" },
 ];
 
 export function go(href: string) {
@@ -24,8 +24,8 @@ export function SiteNav({ active }: { active: NavKey }) {
   return (
     <header className="sticky top-0 z-50 border-b border-separator-border bg-background-full/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#/" className="text-title-3-semibold">
-          lucasfer<span className="text-text-tertiary">.tech</span>
+        <a href="#/" className="font-mono text-body-bold text-text-primary">
+          {"<"}lf<span className="text-text-tertiary">.tech /</span>{">"}
         </a>
         <nav className="hidden items-center gap-7 text-body-medium text-text-secondary md:flex">
           {NAV.map((n) => (
@@ -39,6 +39,7 @@ export function SiteNav({ active }: { active: NavKey }) {
                   : "transition-colors duration-150 hover:text-text-primary active:text-text-primary"
               }
             >
+              <span className="mr-1 font-mono text-body-2-medium text-text-tertiary">{n.num}.</span>
               {n.label}
             </a>
           ))}
@@ -73,6 +74,7 @@ export function SiteNav({ active }: { active: NavKey }) {
                   : "block py-3 text-body-medium text-text-secondary"
               }
             >
+              <span className="mr-2 font-mono text-body-2-medium text-text-tertiary">{n.num}.</span>
               {n.label}
             </a>
           ))}
@@ -84,28 +86,27 @@ export function SiteNav({ active }: { active: NavKey }) {
 
 export function CtaBand() {
   return (
-    <div className="dark">
-      <div className="bg-background-full text-text-primary">
-        <div className="mx-auto max-w-6xl px-6">
-          <section className="py-20 md:py-24">
-            <Reveal>
-              <h2 className="max-w-3xl text-display-2-bold">
-                Vamos transformar atenção em <Marker>receita.</Marker>
-              </h2>
-              <p className="mt-4 max-w-lg text-body-regular text-text-secondary">
-                Projetos, parcerias ou uma vaga onde marketing e tecnologia se encontram.
-                Chama no WhatsApp — respondo rápido.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
-                  Chamar no WhatsApp
-                </Button>
-                <SocialButton brand="linkedin" href={LINKS.linkedin}>LinkedIn</SocialButton>
-                <SocialButton brand="github" href={LINKS.github}>GitHub</SocialButton>
-              </div>
-            </Reveal>
-          </section>
-        </div>
+    <div className="border-t border-separator-border bg-background-secondary-default">
+      <div className="mx-auto max-w-6xl px-6">
+        <section className="py-20 md:py-24">
+          <Reveal>
+            <p className="font-mono text-body-2-medium text-text-tertiary">04. Qual é o próximo passo?</p>
+            <h2 className="mt-3 max-w-3xl text-display-2-bold">
+              Vamos transformar atenção em <Marker>receita.</Marker>
+            </h2>
+            <p className="mt-4 max-w-lg text-body-regular text-text-secondary">
+              Projetos, parcerias ou uma vaga onde marketing e tecnologia se encontram.
+              Chama no WhatsApp — respondo rápido.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
+                Chamar no WhatsApp
+              </Button>
+              <SocialButton brand="linkedin" href={LINKS.linkedin}>LinkedIn</SocialButton>
+              <SocialButton brand="github" href={LINKS.github}>GitHub</SocialButton>
+            </div>
+          </Reveal>
+        </section>
       </div>
     </div>
   );
@@ -116,7 +117,7 @@ export function SiteFooter() {
     <footer className="border-t-4 border-accent-500">
       <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1fr_2fr]">
         <div>
-          <p className="text-title-3-semibold">lucasfer<span className="text-text-tertiary">.tech</span></p>
+          <p className="font-mono text-body-bold text-text-primary">{"<"}lf.tech /{">"}</p>
           <p className="mt-2 max-w-xs text-body-2-medium text-text-secondary">
             Dev · Growth · Automação · IA. Atenção vira receita.
           </p>
@@ -155,7 +156,7 @@ export function SiteFooter() {
       <div className="border-t border-separator-border">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-6 py-5 text-body-2-medium text-text-tertiary">
           <p>© {new Date().getFullYear()} Lucas Fernandes</p>
-          <p>Feito com BoardUI</p>
+          <p className="font-mono">Feito com BoardUI · dark por padrão</p>
         </div>
       </div>
     </footer>

@@ -4,10 +4,10 @@ import { cx } from "@/utils/cx";
 
 const Home = lazy(() => import("./pages/Home"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
-const Ferramentas = lazy(() => import("./pages/Ferramentas"));
-const Blog = lazy(() => import("./pages/Blog").then((m) => ({ default: m.BlogList })));
-const BlogPost = lazy(() => import("./pages/Blog").then((m) => ({ default: m.BlogPost })));
-const Contato = lazy(() => import("./pages/Contato"));
+const Ferramentas = lazy(() => import("./pages/Pages").then((m) => ({ default: m.Ferramentas })));
+const Blog = lazy(() => import("./pages/Pages").then((m) => ({ default: m.BlogList })));
+const BlogPost = lazy(() => import("./pages/Pages").then((m) => ({ default: m.BlogPost })));
+const Contato = lazy(() => import("./pages/Pages").then((m) => ({ default: m.Contato })));
 const DesignSystem = lazy(() => import("./DesignSystem"));
 
 /** Eyebrow numerado estilo ArtCraft: 01/Rótulo. */
