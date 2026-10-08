@@ -2,6 +2,9 @@ import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from "rea
 import {
   RiArrowRightLine,
   RiArrowRightUpLine,
+  RiLineChartLine,
+  RiMegaphoneLine,
+  RiRobotLine,
   RiWhatsappLine,
 } from "@remixicon/react";
 import { DirectionProvider } from "@/components/foundations/direction/direction";
@@ -29,10 +32,17 @@ const TICKER = [
   "React", "Next.js", "Node.js", "Python", "Lovable", "Claude", "Power BI",
 ];
 
+/* Pipeline ilustrativo — visual de demonstração, não dados reais */
+const PIPELINE = [
+  { stage: "Leads", count: "148", width: "100%", cls: "bg-accent-500" },
+  { stage: "Qualificados", count: "62", width: "62%", cls: "bg-accent-500/70" },
+  { stage: "Propostas", count: "31", width: "38%", cls: "bg-accent-500/45" },
+  { stage: "Fechados", count: "9", width: "20%", cls: "bg-accent-500/25" },
+];
+
 /* Trajetória real — fonte: LinkedIn (out/2026) */
 const JOBS = [
   {
-    n: "01",
     category: "Liderança técnica",
     title: "ESCALE BIZ — Líder de Desenvolvimento",
     desc: "Inteligência técnica & analytics num ecossistema de aceleração de negócios: CI/CD, deploys e processos que sustentam a operação.",
@@ -41,7 +51,6 @@ const JOBS = [
     stack: ["CI/CD", "Analytics", "Liderança"],
   },
   {
-    n: "02",
     category: "Sales Ops & CRM",
     title: "Agilean — Sales Ops · Automação & CRM",
     desc: "Inteligência comercial: KPIs, forecast unificado entre ferramentas de vendas, gestão e otimização de CRM.",
@@ -50,7 +59,6 @@ const JOBS = [
     stack: ["KPIs", "Forecast", "CRM"],
   },
   {
-    n: "03",
     category: "Liderança técnica",
     title: "GN Digital — Líder de Desenvolvimento",
     desc: "Liderança e mentoria de equipe terceirizada e remota, do front ao mobile.",
@@ -59,7 +67,6 @@ const JOBS = [
     stack: ["React", "Mobile", "Mentoria"],
   },
   {
-    n: "04",
     category: "Educação",
     title: "Gracom — Professor de Cinema",
     desc: "Cinema, teoria e efeitos visuais. A base de narrativa que uso até hoje em marketing.",
@@ -72,16 +79,19 @@ const JOBS = [
 /* Atuação real — fonte: site anterior (Framer) */
 const SERVICES = [
   {
+    icon: RiMegaphoneLine,
     title: "Marketing",
     desc: "Ecossistemas de vendas que atraem público qualificado e transformam atenção em receita real.",
     items: ["Estratégia Digital", "Performance", "Conversão"],
   },
   {
+    icon: RiLineChartLine,
     title: "Growth",
     desc: "Alavancas de crescimento via dados e testes rápidos, pra escalar de forma sustentável.",
     items: ["Análise de Dados", "Tráfego Pago", "Escala"],
   },
   {
+    icon: RiRobotLine,
     title: "Automação & IA",
     desc: "Ferramentas conectadas e fluxos inteligentes que eliminam o trabalho manual repetitivo.",
     items: ["Gestão de CRM", "Fluxos Inteligentes", "Integrações", "IA"],
@@ -150,7 +160,7 @@ function Shell() {
     <div className="min-h-screen bg-background-full text-text-primary">
       {/* Nav */}
       <header className="sticky top-0 z-50 border-b border-separator-border bg-background-full/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <a href="#inicio" className="text-title-3-semibold">
             lucasfer<span className="text-text-tertiary">.tech</span>
           </a>
@@ -169,41 +179,82 @@ function Shell() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-6">
-        {/* Hero */}
-        <section id="inicio" className="pb-14 pt-20 md:pt-28">
-          <Reveal>
-            <div className="flex flex-wrap items-center gap-3">
-              <Badge color="primary">Disponível</Badge>
-              <span className="text-body-medium text-text-secondary">Dev · Sales OPS · Growth · MKT · Automação · IA</span>
-            </div>
-            <h1 className="mt-6 max-w-3xl text-title-1-medium">
-              Atenção vira receita.
-            </h1>
-            <p className="mt-5 max-w-2xl text-body-regular text-text-secondary">
-              Sou Lucas Fernandes, Líder de Desenvolvimento na ESCALE BIZ. Conecto Marketing
-              e Growth com CRM, automação e IA — e construo o software que opera tudo isso.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-2">
-              <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
-                Fale comigo
-              </Button>
-              <Button variant="secondary" trailingIcon={RiArrowRightLine} onClick={() => scrollTo("trajetoria")}>
-                Ver trajetória
-              </Button>
-            </div>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <span className="text-body-2-medium text-text-tertiary">ESCALE BIZ · Fortaleza, Brasil</span>
-            </div>
-            <div className="mt-6 flex items-center gap-3">
-              <Avatar initials="LF" size="md" />
-              <p className="text-body-2-medium text-text-secondary">
-                3.610 seguidores • 500+ conexões no LinkedIn
+      {/* Hero */}
+      <div className="relative overflow-hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: "radial-gradient(var(--color-separator-border) 1px, transparent 1.5px)",
+            backgroundSize: "26px 26px",
+            maskImage: "linear-gradient(to bottom, black 30%, transparent 90%)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 30%, transparent 90%)",
+          }}
+        />
+        <main className="relative mx-auto max-w-6xl px-6">
+          <section id="inicio" className="grid items-center gap-12 pb-16 pt-20 md:grid-cols-[1.05fr_0.95fr] md:pt-24">
+            <Reveal>
+              <div className="flex flex-wrap items-center gap-3">
+                <Badge color="primary">Disponível</Badge>
+                <span className="text-body-medium text-text-secondary">Dev · Sales OPS · Growth · MKT · Automação · IA</span>
+              </div>
+              <h1 className="mt-6 text-title-1-medium">
+                Atenção vira receita.
+              </h1>
+              <p className="mt-5 max-w-xl text-body-regular text-text-secondary">
+                Sou Lucas Fernandes, Líder de Desenvolvimento na ESCALE BIZ. Conecto Marketing
+                e Growth com CRM, automação e IA — e construo o software que opera tudo isso.
               </p>
-            </div>
-          </Reveal>
-        </section>
-      </main>
+              <div className="mt-8 flex flex-wrap gap-2">
+                <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
+                  Fale comigo
+                </Button>
+                <Button variant="secondary" trailingIcon={RiArrowRightLine} onClick={() => scrollTo("trajetoria")}>
+                  Ver trajetória
+                </Button>
+              </div>
+              <div className="mt-8 flex items-center gap-3">
+                <Avatar initials="LF" size="md" />
+                <p className="text-body-2-medium text-text-secondary">
+                  3.610 seguidores • 500+ conexões no LinkedIn
+                  <span className="mt-0.5 block text-text-tertiary">ESCALE BIZ · Fortaleza, Brasil</span>
+                </p>
+              </div>
+            </Reveal>
+
+            {/* Painel pipeline */}
+            <Reveal className="w-full">
+              <div className="rounded-3xl border border-border-button-default bg-background-primary-default p-6 shadow-card">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-caption-1-semibold text-text-tertiary">Pipeline · CRM</p>
+                    <p className="mt-0.5 text-headline-medium">Funil deste mês</p>
+                  </div>
+                  <Badge color="neutral">Exemplo</Badge>
+                </div>
+                <div className="mt-5 space-y-4">
+                  {PIPELINE.map((s) => (
+                    <div key={s.stage}>
+                      <div className="flex items-baseline justify-between text-body-2-medium">
+                        <span className="text-text-secondary">{s.stage}</span>
+                        <span className="text-text-primary">{s.count}</span>
+                      </div>
+                      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-background-secondary-default">
+                        <div className={cx("h-full rounded-full", s.cls)} style={{ width: s.width }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 flex items-center justify-between border-t border-separator-border pt-4 text-body-2-medium">
+                  <span className="text-text-secondary">Nenhuma oportunidade parada há +7 dias</span>
+                  <span className="text-text-primary">● saudável</span>
+                </div>
+                <p className="mt-3 text-body-2-medium text-text-tertiary">Visual ilustrativo — o seu funil entra aqui.</p>
+              </div>
+            </Reveal>
+          </section>
+        </main>
+      </div>
 
       {/* Ticker */}
       <div className="overflow-hidden border-y border-separator-border py-3">
@@ -216,60 +267,63 @@ function Shell() {
         </div>
       </div>
 
-      <main className="mx-auto max-w-5xl px-6">
-        {/* 01 Trajetória */}
-        <section id="trajetoria" className="py-20 md:py-28">
-          <Reveal>
-            <Eyebrow index="01" label="Trajetória" />
-            <h2 className="mt-2 max-w-xl text-title-2-medium">Quatro capítulos. Escolha um pra explorar.</h2>
-          </Reveal>
-          <div className="mt-10 divide-y divide-separator-border border-y border-separator-border">
-            {JOBS.map((j) => (
-              <Reveal key={j.n}>
-                <article className="grid gap-5 py-10 md:grid-cols-[56px_1fr] md:gap-8">
-                  <span className="text-body-medium text-text-tertiary">{j.n}</span>
-                  <div>
-                    <p className="text-caption-1-semibold text-text-tertiary">{j.category}</p>
-                    <h3 className="mt-1 text-title-3-semibold">{j.title}</h3>
-                    <p className="mt-2 max-w-xl text-body-regular text-text-secondary">{j.desc}</p>
-                    <div className="mt-4 flex flex-wrap items-center gap-2">
-                      <Badge color={j.status.primary ? "primary" : "neutral"}>{j.status.label}</Badge>
-                      {j.stack.map((s) => (
-                        <Chip key={s} variant="caption">{s}</Chip>
-                      ))}
-                    </div>
-                    <p className="mt-4 text-body-2-medium text-text-tertiary">{j.foot}</p>
+      {/* 01 Trajetória — faixa + timeline */}
+      <div className="border-b border-separator-border bg-background-secondary-default">
+        <div className="mx-auto max-w-6xl px-6">
+          <section id="trajetoria" className="py-20 md:py-24">
+            <Reveal>
+              <Eyebrow index="01" label="Trajetória" />
+              <h2 className="mt-2 max-w-xl text-title-2-medium">Quatro capítulos. Escolha um pra explorar.</h2>
+            </Reveal>
+            <div className="relative mt-10 ms-1 border-s border-separator-border ps-8 md:ms-2 md:ps-12">
+              {JOBS.map((j) => (
+                <Reveal key={j.title} className="relative pb-12 last:pb-0">
+                  <span aria-hidden className="absolute top-1.5 -start-[37px] size-2.5 rounded-full bg-accent-500 ring-4 ring-background-secondary-default md:-start-[57px]" />
+                  <p className="text-caption-1-semibold text-text-tertiary">{j.category}</p>
+                  <h3 className="mt-1 text-title-3-semibold">{j.title}</h3>
+                  <p className="mt-2 max-w-2xl text-body-regular text-text-secondary">{j.desc}</p>
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <Badge color={j.status.primary ? "primary" : "neutral"}>{j.status.label}</Badge>
+                    {j.stack.map((s) => (
+                      <Chip key={s} variant="caption">{s}</Chip>
+                    ))}
                   </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="mt-8">
-            <a
-              href={LINKS.linkedin}
-              target="_blank"
-              rel="noopener"
-              className="inline-flex items-center gap-1 text-body-medium text-text-secondary underline-offset-4 transition-colors duration-150 hover:text-text-primary hover:underline active:text-text-primary"
-            >
-              Perfil completo no LinkedIn
-              <RiArrowRightUpLine className="size-4" aria-hidden />
-            </a>
-          </Reveal>
-        </section>
+                  <p className="mt-3 text-body-2-medium text-text-tertiary">{j.foot}</p>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal className="mt-10">
+              <a
+                href={LINKS.linkedin}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-1 text-body-medium text-text-secondary underline-offset-4 transition-colors duration-150 hover:text-text-primary hover:underline active:text-text-primary"
+              >
+                Perfil completo no LinkedIn
+                <RiArrowRightUpLine className="size-4" aria-hidden />
+              </a>
+            </Reveal>
+          </section>
+        </div>
+      </div>
 
+      <div className="mx-auto max-w-6xl px-6">
         {/* 02 Atuação */}
-        <section id="atuacao" className="py-20 md:py-28">
+        <section id="atuacao" className="py-20 md:py-24">
           <Reveal>
             <Eyebrow index="02" label="Atuação" />
             <h2 className="mt-2 max-w-xl text-title-2-medium">Onde eu gero receita.</h2>
           </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {SERVICES.map((g, i) => (
-              <Reveal key={g.title}>
-                <div className="h-full rounded-3xl border border-border-button-default bg-background-primary-default p-6">
-                  <p className="text-body-2-medium text-text-tertiary">0{i + 1}</p>
-                  <h3 className="mt-1 text-headline-medium">{g.title}</h3>
-                  <p className="mt-1 text-body-2-medium text-text-secondary">{g.desc}</p>
+              <Reveal key={g.title} className="h-full">
+                <div className="flex h-full flex-col rounded-3xl border border-border-button-default bg-background-primary-default p-6 transition-colors duration-150 hover:border-border-button-hover active:border-border-button-hover">
+                  <div className="flex items-center justify-between">
+                    <g.icon className="size-6 text-foreground-icon-primary" aria-hidden />
+                    <span className="text-body-2-medium text-text-tertiary">0{i + 1}</span>
+                  </div>
+                  <h3 className="mt-4 text-headline-medium">{g.title}</h3>
+                  <p className="mt-1 flex-1 text-body-2-medium text-text-secondary">{g.desc}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {g.items.map((s) => (
                       <Chip key={s} variant="subtle">{s}</Chip>
@@ -287,20 +341,20 @@ function Shell() {
         </section>
 
         {/* 03 Formação */}
-        <section id="formacao" className="py-20 md:py-28">
+        <section id="formacao" className="py-20 md:py-24">
           <Reveal>
             <Eyebrow index="03" label="Formação" />
             <h2 className="mt-2 max-w-xl text-title-2-medium">Estudo em público.</h2>
           </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-2">
-            <Reveal>
+            <Reveal className="h-full">
               <div className="h-full rounded-3xl border border-border-button-default bg-background-primary-default p-6">
                 <p className="text-caption-1-semibold text-text-tertiary">Graduação</p>
                 <h3 className="mt-1 text-headline-medium">Marketing — UNIFOR</h3>
                 <p className="mt-1 text-body-2-medium text-text-secondary">2018 — 2024 · Universidade de Fortaleza</p>
               </div>
             </Reveal>
-            <Reveal>
+            <Reveal className="h-full">
               <div className="h-full rounded-3xl border border-border-button-default bg-background-primary-default p-6">
                 <p className="text-caption-1-semibold text-text-tertiary">Técnico</p>
                 <h3 className="mt-1 text-headline-medium">Graphic Design — Gracom</h3>
@@ -329,40 +383,45 @@ function Shell() {
             </div>
           </Reveal>
         </section>
+      </div>
 
-        {/* CTA band */}
-        <section id="contato" className="pb-24 pt-4 md:pb-32">
-          <Reveal>
-            <div className="rounded-3xl border border-border-button-default bg-background-secondary-default p-8 md:p-14">
-              <h2 className="max-w-xl text-title-2-medium">Vamos transformar atenção em receita.</h2>
-              <p className="mt-3 max-w-lg text-body-regular text-text-secondary">
-                Projetos, parcerias ou uma vaga onde marketing e tecnologia se encontram.
-                Chama no WhatsApp — respondo rápido.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
-                  Chamar no WhatsApp
-                </Button>
-                <SocialButton brand="linkedin" href={LINKS.linkedin}>LinkedIn</SocialButton>
-                <SocialButton brand="github" href={LINKS.github}>GitHub</SocialButton>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <SocialButton brand="x" href={LINKS.x}>X</SocialButton>
-                <SocialButton brand="instagram" href={LINKS.instagram}>Instagram</SocialButton>
-              </div>
-              <p className="mt-6 text-body-2-medium text-text-tertiary">
-                Prefere email?{" "}
-                <a href={LINKS.email} className="underline-offset-4 hover:underline">
-                  contato@lucasfernandes.dev
-                </a>
-              </p>
-            </div>
-          </Reveal>
-        </section>
-      </main>
+      {/* CTA — faixa escura */}
+      <div className="dark">
+        <div className="bg-background-full text-text-primary">
+          <div className="mx-auto max-w-6xl px-6">
+            <section id="contato" className="py-20 md:py-24">
+              <Reveal>
+                <Eyebrow index="04" label="Contato" />
+                <h2 className="mt-2 max-w-2xl text-title-1-medium">Vamos transformar atenção em receita.</h2>
+                <p className="mt-4 max-w-lg text-body-regular text-text-secondary">
+                  Projetos, parcerias ou uma vaga onde marketing e tecnologia se encontram.
+                  Chama no WhatsApp — respondo rápido.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-2">
+                  <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
+                    Chamar no WhatsApp
+                  </Button>
+                  <SocialButton brand="linkedin" href={LINKS.linkedin}>LinkedIn</SocialButton>
+                  <SocialButton brand="github" href={LINKS.github}>GitHub</SocialButton>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <SocialButton brand="x" href={LINKS.x}>X</SocialButton>
+                  <SocialButton brand="instagram" href={LINKS.instagram}>Instagram</SocialButton>
+                </div>
+                <p className="mt-6 text-body-2-medium text-text-tertiary">
+                  Prefere email?{" "}
+                  <a href={LINKS.email} className="underline-offset-4 hover:underline">
+                    contato@lucasfernandes.dev
+                  </a>
+                </p>
+              </Reveal>
+            </section>
+          </div>
+        </div>
+      </div>
 
       <footer className="border-t border-separator-border">
-        <div className="mx-auto grid max-w-5xl gap-8 px-6 py-12 md:grid-cols-[1fr_2fr]">
+        <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1fr_2fr]">
           <div>
             <p className="text-title-3-semibold">lucasfer<span className="text-text-tertiary">.tech</span></p>
             <p className="mt-2 max-w-xs text-body-2-medium text-text-secondary">
@@ -399,7 +458,7 @@ function Shell() {
           </div>
         </div>
         <div className="border-t border-separator-border">
-          <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-2 px-6 py-5 text-body-2-medium text-text-tertiary">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-6 py-5 text-body-2-medium text-text-tertiary">
             <p>© {new Date().getFullYear()} Lucas Fernandes</p>
             <p>Feito com BoardUI</p>
           </div>
