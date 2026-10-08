@@ -160,7 +160,7 @@ export function Reveal({ children, className }: { children: ReactNode; className
 /** Palavra com marca-texto na cor de destaque. */
 function Marker({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-block -rotate-1 rounded-xl bg-accent-400 px-3 text-white">
+    <span className="inline-block rounded-xl bg-accent-400 px-3 text-white">
       {children}
     </span>
   );
@@ -199,10 +199,10 @@ function Shell() {
         <section id="inicio" className="pb-16 pt-16 md:pb-20 md:pt-24">
           <Reveal>
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-block -rotate-3">
+              <span className="inline-block">
                 <Badge color="primary">Disponível</Badge>
               </span>
-              <span className="inline-block rotate-2">
+              <span className="inline-block">
                 <Chip color="lime" variant="subtle">respondo em 24h</Chip>
               </span>
             </div>
