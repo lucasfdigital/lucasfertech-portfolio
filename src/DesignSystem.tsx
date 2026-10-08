@@ -90,9 +90,9 @@ export default function DesignSystem() {
             <Reveal>
               <div className="h-full rounded-3xl border border-border-button-default bg-background-primary-default p-8">
                 <p className="text-title-2-medium">lucasfer<span className="text-text-tertiary">.tech</span></p>
-                <p className="mt-3 text-headline-medium">Código que vira produto.</p>
+                <p className="mt-3 text-headline-medium">Atenção vira receita.</p>
                 <p className="mt-2 text-body-regular text-text-secondary">
-                  A promessa em uma linha: nada de código por código. Tudo que sai daqui vira coisa usável.
+                  A promessa em uma linha: marketing que atrai, sistema que converte. Nada de código por código.
                 </p>
               </div>
             </Reveal>
@@ -195,7 +195,7 @@ export default function DesignSystem() {
             <div className="mt-8 divide-y divide-separator-border border-y border-separator-border">
               {TYPE_SAMPLES.map(([cls, use]) => (
                 <div key={cls} className="grid gap-1 py-5 md:grid-cols-[1fr_240px] md:items-baseline">
-                  <p className={cls}>Código que vira produto.</p>
+                  <p className={cls}>Atenção vira receita.</p>
                   <p className="font-mono text-body-2-medium text-text-tertiary">{cls} — {use}</p>
                 </div>
               ))}
