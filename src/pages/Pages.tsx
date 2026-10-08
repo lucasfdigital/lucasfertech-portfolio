@@ -18,8 +18,8 @@ export function Ferramentas() {
             <p className="font-mono text-body-2-medium text-text-tertiary">01. ferramentas</p>
             <h1 className="mt-2 max-w-3xl text-display-1-bold">O que eu uso e recomendo.</h1>
             <p className="mt-4 max-w-2xl text-body-regular text-text-secondary">
-              Ferramentas testadas na operação real — nada de lista genérica.
-              Cada uma aqui eu assino embaixo.
+              Minha caixa de ferramenta: {TOOLS.length} apps gratuitos que uso ou recomendo,
+              do banco de dados ao deploy. Nada de lista genérica.
             </p>
           </Reveal>
         </section>
