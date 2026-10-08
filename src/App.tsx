@@ -32,17 +32,11 @@ const TICKER = [
   "React", "Next.js", "Node.js", "Python", "Lovable", "Claude", "Power BI",
 ];
 
-/* Pipeline ilustrativo — visual de demonstração, não dados reais */
-const PIPELINE = [
-  { stage: "Leads", count: "148", width: "100%", cls: "bg-accent-500" },
-  { stage: "Qualificados", count: "62", width: "62%", cls: "bg-accent-500/70" },
-  { stage: "Propostas", count: "31", width: "38%", cls: "bg-accent-500/45" },
-  { stage: "Fechados", count: "9", width: "20%", cls: "bg-accent-500/25" },
-];
-
 /* Trajetória real — fonte: LinkedIn (out/2026) */
 const JOBS = [
   {
+    tile: "ES",
+    tileCls: "bg-status-purple-background text-status-purple-text",
     category: "Liderança técnica",
     title: "ESCALE BIZ — Líder de Desenvolvimento",
     desc: "Inteligência técnica & analytics num ecossistema de aceleração de negócios: CI/CD, deploys e processos que sustentam a operação.",
@@ -51,6 +45,8 @@ const JOBS = [
     stack: ["CI/CD", "Analytics", "Liderança"],
   },
   {
+    tile: "AG",
+    tileCls: "bg-status-blue-background text-status-blue-text",
     category: "Sales Ops & CRM",
     title: "Agilean — Sales Ops · Automação & CRM",
     desc: "Inteligência comercial: KPIs, forecast unificado entre ferramentas de vendas, gestão e otimização de CRM.",
@@ -59,6 +55,8 @@ const JOBS = [
     stack: ["KPIs", "Forecast", "CRM"],
   },
   {
+    tile: "GN",
+    tileCls: "bg-status-cyan-background text-status-cyan-text",
     category: "Liderança técnica",
     title: "GN Digital — Líder de Desenvolvimento",
     desc: "Liderança e mentoria de equipe terceirizada e remota, do front ao mobile.",
@@ -67,6 +65,8 @@ const JOBS = [
     stack: ["React", "Mobile", "Mentoria"],
   },
   {
+    tile: "GR",
+    tileCls: "bg-status-yellow-background text-status-yellow-text",
     category: "Educação",
     title: "Gracom — Professor de Cinema",
     desc: "Cinema, teoria e efeitos visuais. A base de narrativa que uso até hoje em marketing.",
@@ -80,18 +80,24 @@ const JOBS = [
 const SERVICES = [
   {
     icon: RiMegaphoneLine,
+    cardCls: "bg-status-orange-background",
+    titleCls: "text-status-orange-text",
     title: "Marketing",
     desc: "Ecossistemas de vendas que atraem público qualificado e transformam atenção em receita real.",
     items: ["Estratégia Digital", "Performance", "Conversão"],
   },
   {
     icon: RiLineChartLine,
+    cardCls: "bg-status-lime-background",
+    titleCls: "text-status-lime-text",
     title: "Growth",
     desc: "Alavancas de crescimento via dados e testes rápidos, pra escalar de forma sustentável.",
     items: ["Análise de Dados", "Tráfego Pago", "Escala"],
   },
   {
     icon: RiRobotLine,
+    cardCls: "bg-status-purple-background",
+    titleCls: "text-status-purple-text",
     title: "Automação & IA",
     desc: "Ferramentas conectadas e fluxos inteligentes que eliminam o trabalho manual repetitivo.",
     items: ["Gestão de CRM", "Fluxos Inteligentes", "Integrações", "IA"],
@@ -100,12 +106,12 @@ const SERVICES = [
 
 /* Certificados recentes — fonte: LinkedIn (21 no total) */
 const CERTS = [
-  ["Anthropic: Claude", "Anthropic · abr 2026"],
-  ["Formação Lovable", "Viver de IA · abr 2026"],
-  ["Tavily Web Search API", "Tavily · mar 2026"],
-  ["Growth Marketing Essencial 2.0", "Conversion · nov 2025"],
-  ["Power BI com IA", "Rocketseat · out 2025"],
-  ["NLW IA — IA em Programação", "Rocketseat · set 2023"],
+  ["AN", "bg-status-blue-background text-status-blue-text", "Anthropic: Claude", "Anthropic · abr 2026"],
+  ["LO", "bg-status-rose-background text-status-rose-text", "Formação Lovable", "Viver de IA · abr 2026"],
+  ["TA", "bg-status-cyan-background text-status-cyan-text", "Tavily Web Search API", "Tavily · mar 2026"],
+  ["GR", "bg-status-lime-background text-status-lime-text", "Growth Marketing Essencial 2.0", "Conversion · nov 2025"],
+  ["BI", "bg-status-purple-background text-status-purple-text", "Power BI com IA", "Rocketseat · out 2025"],
+  ["IA", "bg-status-orange-background text-status-orange-text", "NLW IA — IA em Programação", "Rocketseat · set 2023"],
 ];
 
 /** Eyebrow numerado estilo ArtCraft: 01/Rótulo. */
@@ -151,6 +157,15 @@ export function Reveal({ children, className }: { children: ReactNode; className
   );
 }
 
+/** Palavra com marca-texto na cor de destaque. */
+function Marker({ children }: { children: ReactNode }) {
+  return (
+    <span className="inline-block -rotate-1 rounded-xl bg-accent-400 px-3 text-white">
+      {children}
+    </span>
+  );
+}
+
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
@@ -179,150 +194,118 @@ function Shell() {
         </div>
       </header>
 
-      {/* Hero */}
-      <div className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage: "radial-gradient(var(--color-separator-border) 1px, transparent 1.5px)",
-            backgroundSize: "26px 26px",
-            maskImage: "linear-gradient(to bottom, black 30%, transparent 90%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 30%, transparent 90%)",
-          }}
-        />
-        <main className="relative mx-auto max-w-6xl px-6">
-          <section id="inicio" className="grid items-center gap-12 pb-16 pt-20 md:grid-cols-[1.05fr_0.95fr] md:pt-24">
-            <Reveal>
-              <div className="flex flex-wrap items-center gap-3">
+      <main className="mx-auto max-w-6xl px-6">
+        {/* Hero */}
+        <section id="inicio" className="pb-16 pt-16 md:pb-20 md:pt-24">
+          <Reveal>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-block -rotate-3">
                 <Badge color="primary">Disponível</Badge>
-                <span className="text-body-medium text-text-secondary">Dev · Sales OPS · Growth · MKT · Automação · IA</span>
-              </div>
-              <h1 className="mt-6 text-title-1-medium">
-                Atenção vira receita.
-              </h1>
-              <p className="mt-5 max-w-xl text-body-regular text-text-secondary">
-                Sou Lucas Fernandes, Líder de Desenvolvimento na ESCALE BIZ. Conecto Marketing
-                e Growth com CRM, automação e IA — e construo o software que opera tudo isso.
+              </span>
+              <span className="inline-block rotate-2">
+                <Chip color="lime" variant="subtle">respondo em 24h</Chip>
+              </span>
+            </div>
+            <p className="mt-6 text-body-bold text-text-secondary">
+              Dev · Sales OPS · Growth · MKT · Automação · IA
+            </p>
+            <h1 className="mt-3 max-w-4xl text-display-1-bold">
+              Atenção vira <Marker>receita.</Marker>
+            </h1>
+            <p className="mt-6 max-w-2xl text-body-regular text-text-secondary">
+              Sou Lucas Fernandes, Líder de Desenvolvimento na ESCALE BIZ. Conecto Marketing
+              e Growth com CRM, automação e IA — e construo o software que opera tudo isso.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
+                Fale comigo
+              </Button>
+              <Button variant="secondary" trailingIcon={RiArrowRightLine} onClick={() => scrollTo("trajetoria")}>
+                Ver trajetória
+              </Button>
+            </div>
+            <div className="mt-10 flex items-center gap-3">
+              <Avatar initials="LF" size="lg" />
+              <p className="text-body-2-medium text-text-secondary">
+                <span className="text-body-bold text-text-primary">3.610 seguidores</span> • 500+ conexões no LinkedIn
+                <span className="mt-0.5 block text-text-tertiary">ESCALE BIZ · Fortaleza, Brasil</span>
               </p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                <Button leadingIcon={RiWhatsappLine} onClick={() => window.open(LINKS.whatsapp, "_blank")}>
-                  Fale comigo
-                </Button>
-                <Button variant="secondary" trailingIcon={RiArrowRightLine} onClick={() => scrollTo("trajetoria")}>
-                  Ver trajetória
-                </Button>
-              </div>
-              <div className="mt-8 flex items-center gap-3">
-                <Avatar initials="LF" size="md" />
-                <p className="text-body-2-medium text-text-secondary">
-                  3.610 seguidores • 500+ conexões no LinkedIn
-                  <span className="mt-0.5 block text-text-tertiary">ESCALE BIZ · Fortaleza, Brasil</span>
-                </p>
-              </div>
-            </Reveal>
+            </div>
+          </Reveal>
+        </section>
+      </main>
 
-            {/* Painel pipeline */}
-            <Reveal className="w-full">
-              <div className="rounded-3xl border border-border-button-default bg-background-primary-default p-6 shadow-card">
-                <div className="flex items-center justify-between gap-3">
-                  <div>
-                    <p className="text-caption-1-semibold text-text-tertiary">Pipeline · CRM</p>
-                    <p className="mt-0.5 text-headline-medium">Funil deste mês</p>
-                  </div>
-                  <Badge color="neutral">Exemplo</Badge>
-                </div>
-                <div className="mt-5 space-y-4">
-                  {PIPELINE.map((s) => (
-                    <div key={s.stage}>
-                      <div className="flex items-baseline justify-between text-body-2-medium">
-                        <span className="text-text-secondary">{s.stage}</span>
-                        <span className="text-text-primary">{s.count}</span>
-                      </div>
-                      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-background-secondary-default">
-                        <div className={cx("h-full rounded-full", s.cls)} style={{ width: s.width }} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 flex items-center justify-between border-t border-separator-border pt-4 text-body-2-medium">
-                  <span className="text-text-secondary">Nenhuma oportunidade parada há +7 dias</span>
-                  <span className="text-text-primary">● saudável</span>
-                </div>
-                <p className="mt-3 text-body-2-medium text-text-tertiary">Visual ilustrativo — o seu funil entra aqui.</p>
-              </div>
-            </Reveal>
-          </section>
-        </main>
-      </div>
-
-      {/* Ticker */}
-      <div className="overflow-hidden border-y border-separator-border py-3">
+      {/* Ticker em faixa sólida */}
+      <div className="overflow-hidden bg-accent-500 py-3">
         <div className="animate-ticker flex w-max items-center gap-6">
           {[...TICKER, ...TICKER].map((t, i) => (
-            <span key={`${t}-${i}`} className="flex items-center gap-6 text-body-2-medium text-text-tertiary" aria-hidden={i >= TICKER.length}>
-              <span className="text-text-placeholder">▪</span> {t}
+            <span key={`${t}-${i}`} className="flex items-center gap-6 text-body-bold text-white" aria-hidden={i >= TICKER.length}>
+              <span className="text-white/70">▪</span> {t}
             </span>
           ))}
         </div>
       </div>
 
-      {/* 01 Trajetória — faixa + timeline */}
-      <div className="border-b border-separator-border bg-background-secondary-default">
-        <div className="mx-auto max-w-6xl px-6">
-          <section id="trajetoria" className="py-20 md:py-24">
-            <Reveal>
-              <Eyebrow index="01" label="Trajetória" />
-              <h2 className="mt-2 max-w-xl text-title-2-medium">Quatro capítulos. Escolha um pra explorar.</h2>
-            </Reveal>
-            <div className="relative mt-10 ms-1 border-s border-separator-border ps-8 md:ms-2 md:ps-12">
-              {JOBS.map((j) => (
-                <Reveal key={j.title} className="relative pb-12 last:pb-0">
-                  <span aria-hidden className="absolute top-1.5 -start-[37px] size-2.5 rounded-full bg-accent-500 ring-4 ring-background-secondary-default md:-start-[57px]" />
-                  <p className="text-caption-1-semibold text-text-tertiary">{j.category}</p>
-                  <h3 className="mt-1 text-title-3-semibold">{j.title}</h3>
-                  <p className="mt-2 max-w-2xl text-body-regular text-text-secondary">{j.desc}</p>
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
-                    <Badge color={j.status.primary ? "primary" : "neutral"}>{j.status.label}</Badge>
-                    {j.stack.map((s) => (
-                      <Chip key={s} variant="caption">{s}</Chip>
-                    ))}
-                  </div>
-                  <p className="mt-3 text-body-2-medium text-text-tertiary">{j.foot}</p>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal className="mt-10">
-              <a
-                href={LINKS.linkedin}
-                target="_blank"
-                rel="noopener"
-                className="inline-flex items-center gap-1 text-body-medium text-text-secondary underline-offset-4 transition-colors duration-150 hover:text-text-primary hover:underline active:text-text-primary"
-              >
-                Perfil completo no LinkedIn
-                <RiArrowRightUpLine className="size-4" aria-hidden />
-              </a>
-            </Reveal>
-          </section>
-        </div>
-      </div>
-
       <div className="mx-auto max-w-6xl px-6">
-        {/* 02 Atuação */}
+        {/* 01 Trajetória — timeline com logo-tiles */}
+        <section id="trajetoria" className="py-20 md:py-24">
+          <Reveal>
+            <Eyebrow index="01" label="Trajetória" />
+            <h2 className="mt-2 max-w-2xl text-display-3-bold">Quatro capítulos.</h2>
+          </Reveal>
+          <div className="relative mt-10 ms-6 border-s-2 border-separator-border ps-10 md:ms-8 md:ps-14">
+            {JOBS.map((j) => (
+              <Reveal key={j.title} className="relative pb-12 last:pb-0">
+                <span
+                  aria-hidden
+                  className={cx(
+                    "absolute -start-[62px] grid size-12 place-items-center rounded-2xl text-body-bold md:-start-[86px]",
+                    j.tileCls,
+                 )}
+                >
+                  {j.tile}
+                </span>
+                <p className="text-caption-1-semibold text-text-tertiary">{j.category}</p>
+                <h3 className="mt-1 text-title-3-semibold">{j.title}</h3>
+                <p className="mt-2 max-w-2xl text-body-regular text-text-secondary">{j.desc}</p>
+                <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <Badge color={j.status.primary ? "primary" : "neutral"}>{j.status.label}</Badge>
+                  {j.stack.map((s) => (
+                    <Chip key={s} variant="caption">{s}</Chip>
+                  ))}
+                </div>
+                <p className="mt-3 text-body-2-medium text-text-tertiary">{j.foot}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-10">
+            <a
+              href={LINKS.linkedin}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-1 text-body-medium text-text-secondary underline-offset-4 transition-colors duration-150 hover:text-text-primary hover:underline active:text-text-primary"
+            >
+              Perfil completo no LinkedIn
+              <RiArrowRightUpLine className="size-4" aria-hidden />
+            </a>
+          </Reveal>
+        </section>
+
+        {/* 02 Atuação — cards tingidos */}
         <section id="atuacao" className="py-20 md:py-24">
           <Reveal>
             <Eyebrow index="02" label="Atuação" />
-            <h2 className="mt-2 max-w-xl text-title-2-medium">Onde eu gero receita.</h2>
+            <h2 className="mt-2 max-w-2xl text-display-3-bold">Onde eu gero <Marker>receita.</Marker></h2>
           </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {SERVICES.map((g, i) => (
               <Reveal key={g.title} className="h-full">
-                <div className="flex h-full flex-col rounded-3xl border border-border-button-default bg-background-primary-default p-6 transition-colors duration-150 hover:border-border-button-hover active:border-border-button-hover">
+                <div className={cx("flex h-full flex-col rounded-3xl border border-border-button-default p-6", g.cardCls)}>
                   <div className="flex items-center justify-between">
-                    <g.icon className="size-6 text-foreground-icon-primary" aria-hidden />
-                    <span className="text-body-2-medium text-text-tertiary">0{i + 1}</span>
+                    <g.icon className={cx("size-7", g.titleCls)} aria-hidden />
+                    <span className="font-mono text-body-2-medium text-text-tertiary">0{i + 1}</span>
                   </div>
-                  <h3 className="mt-4 text-headline-medium">{g.title}</h3>
+                  <h3 className={cx("mt-4 text-headline-medium", g.titleCls)}>{g.title}</h3>
                   <p className="mt-1 flex-1 text-body-2-medium text-text-secondary">{g.desc}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {g.items.map((s) => (
@@ -344,31 +327,42 @@ function Shell() {
         <section id="formacao" className="py-20 md:py-24">
           <Reveal>
             <Eyebrow index="03" label="Formação" />
-            <h2 className="mt-2 max-w-xl text-title-2-medium">Estudo em público.</h2>
+            <h2 className="mt-2 max-w-2xl text-display-3-bold">Estudo em público.</h2>
           </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             <Reveal className="h-full">
-              <div className="h-full rounded-3xl border border-border-button-default bg-background-primary-default p-6">
-                <p className="text-caption-1-semibold text-text-tertiary">Graduação</p>
-                <h3 className="mt-1 text-headline-medium">Marketing — UNIFOR</h3>
-                <p className="mt-1 text-body-2-medium text-text-secondary">2018 — 2024 · Universidade de Fortaleza</p>
+              <div className="flex h-full items-start gap-4 rounded-3xl border border-border-button-default bg-background-primary-default p-6">
+                <span aria-hidden className="grid size-12 shrink-0 place-items-center rounded-2xl bg-status-purple-background text-body-bold text-status-purple-text">UN</span>
+                <div>
+                  <p className="text-caption-1-semibold text-text-tertiary">Graduação</p>
+                  <h3 className="mt-1 text-headline-medium">Marketing — UNIFOR</h3>
+                  <p className="mt-1 text-body-2-medium text-text-secondary">2018 — 2024 · Universidade de Fortaleza</p>
+                </div>
               </div>
             </Reveal>
             <Reveal className="h-full">
-              <div className="h-full rounded-3xl border border-border-button-default bg-background-primary-default p-6">
-                <p className="text-caption-1-semibold text-text-tertiary">Técnico</p>
-                <h3 className="mt-1 text-headline-medium">Graphic Design — Gracom</h3>
-                <p className="mt-1 text-body-2-medium text-text-secondary">2013 — 2017 · Escola de Efeitos Visuais</p>
+              <div className="flex h-full items-start gap-4 rounded-3xl border border-border-button-default bg-background-primary-default p-6">
+                <span aria-hidden className="grid size-12 shrink-0 place-items-center rounded-2xl bg-status-yellow-background text-body-bold text-status-yellow-text">GR</span>
+                <div>
+                  <p className="text-caption-1-semibold text-text-tertiary">Técnico</p>
+                  <h3 className="mt-1 text-headline-medium">Graphic Design — Gracom</h3>
+                  <p className="mt-1 text-body-2-medium text-text-secondary">2013 — 2017 · Escola de Efeitos Visuais</p>
+                </div>
               </div>
             </Reveal>
           </div>
           <Reveal>
             <div className="mt-4 divide-y divide-separator-border rounded-3xl border border-border-button-default bg-background-primary-default">
               <p className="px-6 py-4 text-caption-1-semibold text-text-tertiary">Certificados recentes — 21 no total</p>
-              {CERTS.map(([title, org]) => (
-                <div key={title} className="grid gap-1 px-6 py-4 md:grid-cols-[1fr_auto] md:items-baseline">
-                  <p className="text-body-medium">{title}</p>
-                  <p className="text-body-2-medium text-text-tertiary">{org}</p>
+              {CERTS.map(([initials, tileCls, title, org]) => (
+                <div key={title} className="flex items-center gap-4 px-6 py-4">
+                  <span aria-hidden className={cx("grid size-10 shrink-0 place-items-center rounded-xl text-body-2-bold", tileCls)}>
+                    {initials}
+                  </span>
+                  <div className="grid flex-1 gap-1 md:grid-cols-[1fr_auto] md:items-baseline">
+                    <p className="text-body-medium">{title}</p>
+                    <p className="text-body-2-medium text-text-tertiary">{org}</p>
+                  </div>
                 </div>
               ))}
               <a
@@ -392,7 +386,9 @@ function Shell() {
             <section id="contato" className="py-20 md:py-24">
               <Reveal>
                 <Eyebrow index="04" label="Contato" />
-                <h2 className="mt-2 max-w-2xl text-title-1-medium">Vamos transformar atenção em receita.</h2>
+                <h2 className="mt-2 max-w-3xl text-display-2-bold">
+                  Vamos transformar atenção em <Marker>receita.</Marker>
+                </h2>
                 <p className="mt-4 max-w-lg text-body-regular text-text-secondary">
                   Projetos, parcerias ou uma vaga onde marketing e tecnologia se encontram.
                   Chama no WhatsApp — respondo rápido.
@@ -420,7 +416,7 @@ function Shell() {
         </div>
       </div>
 
-      <footer className="border-t border-separator-border">
+      <footer className="border-t-4 border-accent-500">
         <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1fr_2fr]">
           <div>
             <p className="text-title-3-semibold">lucasfer<span className="text-text-tertiary">.tech</span></p>
