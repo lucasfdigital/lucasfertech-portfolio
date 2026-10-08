@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Suspense, lazy, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   RiArrowRightLine,
   RiArrowRightUpLine,
@@ -11,6 +11,8 @@ import { Chip } from "@/components/base/badges/chip";
 import { Button } from "@/components/base/buttons/button";
 import { SocialButton } from "@/components/base/social-button/social-button";
 import { cx } from "@/utils/cx";
+
+const DesignSystem = lazy(() => import("./DesignSystem"));
 
 const LINKS = {
   github: "https://github.com/lucasfdigital",
@@ -90,7 +92,7 @@ const PRINCIPLES = [
 ];
 
 /** Eyebrow numerado estilo ArtCraft: 01/Rótulo. */
-function Eyebrow({ index, label }: { index: string; label: string }) {
+export function Eyebrow({ index, label }: { index: string; label: string }) {
   return (
     <p className="text-caption-1-semibold text-text-tertiary">
       {index}/{label}
@@ -99,7 +101,7 @@ function Eyebrow({ index, label }: { index: string; label: string }) {
 }
 
 /** Entrada padrão BoardUI: fade + scale + blur, uma vez, com reduced-motion. */
-function Reveal({ children, className }: { children: ReactNode; className?: string }) {
+export function Reveal({ children, className }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [shown, setShown] = useState(false);
   useEffect(() => {
@@ -149,6 +151,7 @@ function Shell() {
             <a href="#trabalhos" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Trabalhos</a>
             <a href="#stack" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Stack</a>
             <a href="#principios" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Princípios</a>
+            <a href="#/design" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Design</a>
           </nav>
           <div className="flex items-center gap-2">
             <SocialButton brand="github" iconOnly href={LINKS.github} aria-label="GitHub de Lucas Fernandes" />
@@ -344,6 +347,7 @@ function Shell() {
                 <a href="#trabalhos" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Trabalhos</a>
                 <a href="#stack" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Stack</a>
                 <a href="#principios" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Princípios</a>
+                <a href="#/design" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Design system</a>
               </div>
             </div>
             <div>
@@ -375,10 +379,46 @@ function Shell() {
   );
 }
 
+type View = "site" | "design";
+
+function getView(): View {
+  if (typeof window === "undefined") return "site";
+  if (window.location.hash === "#/design") return "design";
+  if (window.location.pathname.replace(/\/$/, "") === "/design") return "design";
+  return "site";
+}
+
 export default function App() {
+  const [view, setView] = useState<View>(getView);
+
+  useEffect(() => {
+    const onChange = () => setView(getView());
+    window.addEventListener("hashchange", onChange);
+    window.addEventListener("popstate", onChange);
+    return () => {
+      window.removeEventListener("hashchange", onChange);
+      window.removeEventListener("popstate", onChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.title =
+      view === "design"
+        ? "Design System — lucasfer.tech"
+        : "Lucas Fernandes — Desenvolvedor Full Stack";
+  }, [view]);
+
   return (
     <DirectionProvider locale="pt-BR">
-      <Shell />
+      <Suspense
+        fallback={
+          <div className="grid min-h-screen place-items-center bg-background-full">
+            <p className="text-body-medium text-text-tertiary">Carregando design system…</p>
+          </div>
+        }
+      >
+        {view === "design" ? <DesignSystem /> : <Shell />}
+      </Suspense>
     </DirectionProvider>
   );
 }
