@@ -1,19 +1,21 @@
+"use client";
+
 import { RiArrowRightUpLine, RiWhatsappLine } from "@remixicon/react";
 import { Badge } from "@/components/base/badges/badge";
 import { Chip } from "@/components/base/badges/chip";
 import { Button } from "@/components/base/buttons/button";
 import { CLIENTS, LINKS } from "../content";
-import { Reveal } from "../App";
+import { Reveal } from "../ui";
 import { CtaBand, SiteFooter, SiteNav } from "../chrome";
 
 export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background-full text-text-primary">
-      <SiteNav active="portfolio" />
+      <SiteNav active="cases" />
       <main className="mx-auto max-w-6xl px-6">
         <section className="pb-8 pt-16 md:pt-24">
           <Reveal>
-            <p className="font-mono text-body-2-medium text-text-tertiary">01. portfólio</p>
+            <p className="font-mono text-body-2-medium text-text-tertiary">01. cases</p>
             <h1 className="mt-2 max-w-3xl text-display-1-bold">Sites de clientes.</h1>
             <p className="mt-4 max-w-2xl text-body-regular text-text-secondary">
               Sites institucionais, landings e e-commerces que tirei do papel — do escopo

@@ -1,47 +1,67 @@
+"use client";
+
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { RiCloseLine, RiMenuLine, RiWhatsappLine } from "@remixicon/react";
 import { Button } from "@/components/base/buttons/button";
 import { SocialButton } from "@/components/base/social-button/social-button";
 import { LINKS } from "./content";
-import { Marker, Reveal } from "./App";
+import { Marker, Reveal } from "./ui";
 
-export type NavKey = "home" | "portfolio" | "ferramentas" | "blog" | "contato";
+export type NavKey =
+  | "home"
+  | "sobre"
+  | "cases"
+  | "ferramentas"
+  | "servicos"
+  | "blog"
+  | "contato";
 
-const NAV: { key: NavKey; label: string; href: string; num: string }[] = [
-  { key: "home", label: "Início", href: "#/", num: "01" },
-  { key: "portfolio", label: "Portfólio", href: "#/portfolio", num: "02" },
-  { key: "ferramentas", label: "Ferramentas", href: "#/ferramentas", num: "03" },
-  { key: "blog", label: "Blog", href: "#/blog", num: "04" },
-  { key: "contato", label: "Contato", href: "#/contato", num: "05" },
+const NAV: { key: NavKey; label: string; href: string }[] = [
+  { key: "home", label: "Início", href: "/" },
+  { key: "sobre", label: "Sobre", href: "/sobre" },
+  { key: "cases", label: "Cases", href: "/cases" },
+  { key: "ferramentas", label: "Ferramentas", href: "/ferramentas" },
+  { key: "servicos", label: "Serviços", href: "/servicos" },
+  { key: "blog", label: "Blog", href: "/blog" },
+  { key: "contato", label: "Contato", href: "/contato" },
 ];
 
-export function go(href: string) {
-  window.location.hash = href.replace(/^#/, "");
+function deriveNavKey(pathname: string): NavKey {
+  if (pathname.startsWith("/sobre")) return "sobre";
+  if (pathname.startsWith("/cases")) return "cases";
+  if (pathname.startsWith("/ferramentas")) return "ferramentas";
+  if (pathname.startsWith("/servicos")) return "servicos";
+  if (pathname.startsWith("/blog")) return "blog";
+  if (pathname.startsWith("/contato")) return "contato";
+  return "home";
 }
 
-export function SiteNav({ active }: { active: NavKey }) {
+export function SiteNav({ active }: { active?: NavKey }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const current = active ?? deriveNavKey(pathname);
   return (
     <header className="sticky top-0 z-50 border-b border-separator-border bg-background-full/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#/" className="font-mono text-body-bold text-text-primary">
+      <div className="mx-auto flex h-[60px] max-w-6xl items-center justify-between px-6">
+        <Link href="/" className="font-mono text-body-bold text-text-primary">
           {"<"}lf<span className="text-text-tertiary">.tech /</span>{">"}
-        </a>
-        <nav className="hidden items-center gap-7 text-body-medium text-text-secondary md:flex">
+        </Link>
+        <nav className="hidden items-center gap-6 text-body-medium text-text-secondary lg:flex">
           {NAV.map((n) => (
-            <a
+            <Link
               key={n.key}
               href={n.href}
-              aria-current={active === n.key ? "page" : undefined}
+              aria-current={current === n.key ? "page" : undefined}
               className={
-                active === n.key
+                current === n.key
                   ? "text-text-primary"
                   : "transition-colors duration-150 hover:text-text-primary active:text-text-primary"
               }
             >
-              <span className="mr-1 font-mono text-body-2-medium text-text-tertiary">{n.num}.</span>
               {n.label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="flex items-center gap-2">
@@ -54,29 +74,28 @@ export function SiteNav({ active }: { active: NavKey }) {
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="grid size-9 place-items-center rounded-xl border border-border-button-default text-text-primary md:hidden"
+            className="grid size-9 place-items-center rounded-xl border border-border-button-default text-text-primary lg:hidden"
           >
             {open ? <RiCloseLine className="size-5" aria-hidden /> : <RiMenuLine className="size-5" aria-hidden />}
           </button>
         </div>
       </div>
       {open && (
-        <nav className="border-t border-separator-border bg-background-full px-6 py-4 md:hidden">
+        <nav className="border-t border-separator-border bg-background-full px-6 py-4 lg:hidden">
           {NAV.map((n) => (
-            <a
+            <Link
               key={n.key}
               href={n.href}
               onClick={() => setOpen(false)}
-              aria-current={active === n.key ? "page" : undefined}
+              aria-current={current === n.key ? "page" : undefined}
               className={
-                active === n.key
+                current === n.key
                   ? "block py-3 text-body-medium text-text-primary"
                   : "block py-3 text-body-medium text-text-secondary"
               }
             >
-              <span className="mr-2 font-mono text-body-2-medium text-text-tertiary">{n.num}.</span>
               {n.label}
-            </a>
+            </Link>
           ))}
         </nav>
       )}
@@ -114,7 +133,7 @@ export function CtaBand() {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t-4 border-accent-500">
+    <footer className="border-t border-separator-border">
       <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-[1fr_2fr]">
         <div>
           <p className="font-mono text-body-bold text-text-primary">{"<"}lf.tech /{">"}</p>
@@ -127,11 +146,11 @@ export function SiteFooter() {
             <p className="text-caption-1-semibold text-text-tertiary">Site</p>
             <div className="mt-3 flex flex-col gap-2 text-body-medium text-text-secondary">
               {NAV.map((n) => (
-                <a key={n.key} href={n.href} className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">
+                <Link key={n.key} href={n.href} className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">
                   {n.label}
-                </a>
+                </Link>
               ))}
-              <a href="#/design" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Design system</a>
+              <Link href="/design" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Design system</Link>
             </div>
           </div>
           <div>
@@ -148,7 +167,7 @@ export function SiteFooter() {
             <div className="mt-3 flex flex-col gap-2 text-body-medium text-text-secondary">
               <a href={LINKS.whatsapp} target="_blank" rel="noopener" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">WhatsApp</a>
               <a href={LINKS.email} className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Email</a>
-              <a href="#/" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Início ↑</a>
+              <Link href="/" className="transition-colors duration-150 hover:text-text-primary active:text-text-primary">Início ↑</Link>
             </div>
           </div>
         </div>

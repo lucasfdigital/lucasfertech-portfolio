@@ -92,6 +92,15 @@ body {
   font-kerning: normal;
 }
 
+/* OpenStore base interactions: subtle green selection, high-contrast focus. */
+::selection {
+  background-color: var(--color-button-ghost-background);
+}
+:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
 html {
   color-scheme: light;
   background-color: var(--color-background-full);

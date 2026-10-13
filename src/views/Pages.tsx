@@ -1,10 +1,12 @@
+"use client";
+
 import { RiArrowRightUpLine, RiMailLine } from "@remixicon/react";
 import { Badge } from "@/components/base/badges/badge";
 import { Button } from "@/components/base/buttons/button";
 import { SocialButton } from "@/components/base/social-button/social-button";
 import { LINKS, POSTS, TOOLS } from "../content";
-import { Reveal } from "../App";
-import { CtaBand, SiteFooter, SiteNav, go } from "../chrome";
+import { Reveal, useGo } from "../ui";
+import { CtaBand, SiteFooter, SiteNav } from "../chrome";
 
 const CATS = [...new Set(TOOLS.map((t) => t.cat))];
 
@@ -74,6 +76,7 @@ export function Ferramentas() {
 }
 
 export function BlogList() {
+  const go = useGo();
   return (
     <div className="min-h-screen bg-background-full text-text-primary">
       <SiteNav active="blog" />
@@ -94,7 +97,7 @@ export function BlogList() {
               <Reveal key={p.slug}>
                 <button
                   type="button"
-                  onClick={() => go(`#/blog/${p.slug}`)}
+                  onClick={() => go(`/blog/${p.slug}`)}
                   className="block w-full rounded-3xl border border-border-button-default bg-background-primary-default p-6 text-left transition-colors duration-150 hover:border-border-button-hover active:border-border-button-hover md:p-8"
                 >
                   <p className="font-mono text-body-2-medium text-text-tertiary">{p.date} · 3 min</p>
@@ -113,6 +116,7 @@ export function BlogList() {
 }
 
 export function BlogPost({ slug }: { slug: string }) {
+  const go = useGo();
   const post = POSTS.find((p) => p.slug === slug);
   if (!post) {
     return (
@@ -123,7 +127,7 @@ export function BlogPost({ slug }: { slug: string }) {
           <p className="mt-2 text-title-2-medium">Texto não encontrado.</p>
           <button
             type="button"
-            onClick={() => go("#/blog")}
+            onClick={() => go("/blog")}
             className="mt-4 text-body-medium text-text-secondary underline-offset-4 hover:underline"
           >
             Voltar pro blog
@@ -141,7 +145,7 @@ export function BlogPost({ slug }: { slug: string }) {
           <Reveal>
             <button
               type="button"
-              onClick={() => go("#/blog")}
+              onClick={() => go("/blog")}
               className="inline-flex items-center gap-1 font-mono text-body-2-medium text-text-tertiary transition-colors duration-150 hover:text-text-primary active:text-text-primary"
             >
               {"<"} /blog

@@ -32,31 +32,26 @@
    * primitives above. Content/data blues (charts, status chips, calendar
    * events, info notifications) deliberately keep referencing blue-*.
    * --------------------------------------------------------------------------*/
-  --color-accent-50:  var(--color-blue-50);
-  --color-accent-100: var(--color-blue-100);
-  --color-accent-200: var(--color-blue-200);
-  --color-accent-300: var(--color-blue-300);
-  --color-accent-400: var(--color-blue-400);
-  --color-accent-500: var(--color-blue-500);
-  --color-accent-600: var(--color-blue-600);
-  --color-accent-700: var(--color-blue-700);
-  --color-accent-800: var(--color-blue-800);
-  --color-accent-900: var(--color-blue-900);
-  --color-accent-950: var(--color-blue-950);
+  --color-accent-50:  var(--color-green-50);
+  --color-accent-100: var(--color-green-100);
+  --color-accent-200: var(--color-green-200);
+  --color-accent-300: var(--color-green-300);
+  --color-accent-400: var(--color-green-400);
+  --color-accent-500: var(--color-green-500);
+  --color-accent-600: var(--color-green-600);
+  --color-accent-700: var(--color-green-700);
+  --color-accent-800: var(--color-green-800);
+  --color-accent-900: var(--color-green-900);
+  --color-accent-950: var(--color-green-950);
 
   /* ----- Typography ----------------------------------------------------------
-   * Font sizes, weights, line-heights, and tracking all match Tailwind v4
-   * defaults. The only override is the family: Inter, loaded via next/font
-   * in app/layout.tsx, which exposes --font-inter to the document.
+   * Geist + Geist Mono, loaded via Google Fonts in index.html.
    * --------------------------------------------------------------------------*/
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif,
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif,
                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
                "Noto Color Emoji";
 
-  /* Monospace ramp for code blocks. Loaded via next/font in app/layout.tsx
-   * (--font-mono-source → JetBrains Mono). Figma's spec uses IBM Plex Mono;
-   * JetBrains Mono is the closest already-bundled face. */
-  --font-mono: var(--font-mono-source), ui-monospace, "SFMono-Regular", Menlo,
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo,
                Consolas, "Liberation Mono", monospace;
 
   /* ----- Radii ---------------------------------------------------------------
@@ -408,10 +403,13 @@
   --color-chart-agents-bar:        var(--color-purple-300);
   --color-chart-agents-bar-active: var(--color-purple-400);
 
-  /* Button gradients */
-  --gradient-button-primary-default:  linear-gradient(180deg, var(--color-accent-500)    0%, var(--color-accent-600)    100%);
-  --gradient-button-primary-hover:    linear-gradient(180deg, var(--color-accent-400)    0%, var(--color-accent-500)    100%);
-  --gradient-button-primary-active:   linear-gradient(180deg, var(--color-accent-600)    0%, var(--color-accent-700)    100%);
+  /* Button gradients — OpenStore recipe: primary is a neutral near-black in
+   * light mode (white text) and flips to a light #ededed fill in dark mode
+   * (black text), so `--color-button-primary-foreground` rides the theme. */
+  --color-button-primary-foreground:  var(--color-white);
+  --gradient-button-primary-default:  linear-gradient(180deg, var(--color-neutral-700) 0%, var(--color-neutral-900) 100%);
+  --gradient-button-primary-hover:    linear-gradient(180deg, var(--color-neutral-600) 0%, var(--color-neutral-800) 100%);
+  --gradient-button-primary-active:   linear-gradient(180deg, var(--color-neutral-800) 0%, var(--color-neutral-950) 100%);
   --gradient-button-primary-disabled: linear-gradient(180deg, var(--color-neutral-200) 0%, var(--color-neutral-300) 100%);
 
   --gradient-button-danger-default:   linear-gradient(180deg, var(--color-red-500) 0%, var(--color-red-600) 100%);
@@ -435,16 +433,18 @@
   --color-icon-button-disabled-foreground: var(--color-neutral-500);
   --color-button-primary-disabled-foreground: var(--color-neutral-500);
 
-  /* Text */
-  --color-text-primary:  var(--color-neutral-50);
-  --color-text-tertiary: var(--color-neutral-600);
+  /* Text — OpenStore palette (#ededed / #b4b4b4 / #878787 / #525252). */
+  --color-text-primary:  #ededed;
+  --color-text-secondary: #b4b4b4;
+  --color-text-tertiary: #878787;
+  --color-text-placeholder: #525252;
   --color-text-disabled: var(--color-neutral-800);
   --color-text-error-primary: var(--color-red-400);
   --color-text-destructive: color-mix(in srgb, var(--color-red-500) 80%, var(--color-neutral-500));
   --color-input-disabled-text: color-mix(in srgb, var(--color-neutral-500) 40%, transparent);
 
-  /* Background */
-  --color-background-full:              var(--color-neutral-925);
+  /* Background — OpenStore surfaces: #000 page, #0a0a0a card, #111 panel. */
+  --color-background-full:              #000000;
   --color-ticket-detail-surface: var(--color-neutral-925);
   --color-ticket-detail-low-background: color-mix(in srgb, var(--color-indigo-950) 60%, transparent);
   --color-ticket-detail-low-hover: color-mix(in srgb, var(--color-indigo-950) 80%, transparent);
@@ -459,18 +459,18 @@
   --color-project-board-empty-middle: var(--color-neutral-700);
   --color-project-board-empty-back: color-mix(in srgb, var(--color-neutral-600) 35%, var(--color-neutral-700));
   --color-project-board-empty-detail: var(--color-neutral-500);
-  --color-background-primary-default:   var(--color-neutral-800);
+  --color-background-primary-default:   #0a0a0a;
   --color-background-inner-default:     color-mix(in srgb, var(--color-neutral-800) 60%, transparent);
-  --color-background-primary-hover:     color-mix(in srgb, var(--color-neutral-700) 60%, transparent);
-  --color-background-primary-active:    var(--color-neutral-800);
+  --color-background-primary-hover:     #1a1a1a;
+  --color-background-primary-active:    #1f1f1f;
   --color-background-primary-disabled:  var(--color-neutral-800);
   --color-input-disabled-background:    color-mix(in srgb, var(--color-neutral-800) 30%, transparent);
   --color-switch-off-chip-start:        var(--color-background-tertiary-default);
   --color-switch-off-chip-end:          var(--color-background-tertiary-default);
-  --color-background-secondary-default: var(--color-neutral-900);
-  --color-background-secondary-hover:   var(--color-neutral-800);
-  --color-background-tertiary-default:  var(--color-neutral-800);
-  --color-background-tertiary-hover:    var(--color-neutral-700);
+  --color-background-secondary-default: #111111;
+  --color-background-secondary-hover:   #1a1a1a;
+  --color-background-tertiary-default:  #1a1a1a;
+  --color-background-tertiary-hover:    #262626;
   --color-background-tertiary-error:    color-mix(in srgb, var(--color-red-950) 60%, transparent);
   --color-background-quaternary-default: var(--color-neutral-700);
   --color-background-quaternary-hover:   var(--color-neutral-600);
@@ -494,11 +494,12 @@
   --color-questionnaire-key-background:          var(--color-neutral-700);
   --color-questionnaire-key-hover-background:    var(--color-neutral-600);
   --color-agent-progress-ring:                     color-mix(in srgb, var(--color-white) 50%, transparent);
-  --color-button-ghost-background:                var(--color-accent-900);
-  --color-button-ghost-hover:                     var(--color-accent-800);
-  --color-button-ghost-active:                    var(--color-accent-700);
+  /* Ghost CTA — OpenStore success state: #0f2416 fill, #62c073 ink. */
+  --color-button-ghost-background:                #0f2416;
+  --color-button-ghost-hover:                     #14301d;
+  --color-button-ghost-active:                    #1a3a24;
   --color-button-ghost-disabled:                  var(--color-neutral-800);
-  --color-button-ghost-foreground:                var(--color-accent-300);
+  --color-button-ghost-foreground:                #62c073;
   --color-button-ghost-disabled-foreground:       var(--color-neutral-600);
   --color-dropdown-item-hover-background:        color-mix(in srgb, var(--color-neutral-700) 60%, transparent);
   --color-kbd-background:                        var(--color-neutral-700);
@@ -552,10 +553,10 @@
   --color-notification-error-foreground:       var(--color-rose-300);
   --color-notification-center-background:      var(--color-neutral-900);
 
-  /* Borders and separators */
-  --color-border-button-default:   var(--color-neutral-700);
-  --color-border-button-hover:     var(--color-neutral-500);
-  --color-border-button-active:    var(--color-neutral-600);
+  /* Borders and separators — OpenStore #1f1f1f / #2e2e2e / #3f3f3f. */
+  --color-border-button-default:   #1f1f1f;
+  --color-border-button-hover:     #2e2e2e;
+  --color-border-button-active:    #3f3f3f;
   --color-border-button-white:     var(--color-zinc-800);
   --color-border-error-default:    var(--color-red-400);
   --color-border-checkbox-default: var(--color-neutral-700);
@@ -566,8 +567,9 @@
   --color-border-table:            var(--color-neutral-800);
   --color-border-button-group:     color-mix(in srgb, var(--color-neutral-600) 60%, transparent);
   --color-border-sidebar-profile-hover: var(--color-neutral-600);
-  --color-separator-border:        var(--color-neutral-800);
-  --color-separator-border-strong: color-mix(in srgb, var(--color-neutral-700) 60%, transparent);
+  --color-separator-border:        #1f1f1f;
+  --color-separator-border-strong: #2e2e2e;
+  --color-border-focus-ring:       #62c073;
 
   /* Figma's dark table status pairs. */
   --color-status-lime-background:   color-mix(in srgb, var(--color-lime-950) 60%, transparent);
@@ -610,6 +612,12 @@
   --color-calendar-event-emerald-background: var(--color-emerald-950);
   --color-calendar-event-emerald-title:      var(--color-emerald-300);
   --color-calendar-event-emerald-time:       var(--color-emerald-300);
+
+  /* Primary CTA in dark: light #ededed fill with black text (OpenStore). */
+  --color-button-primary-foreground: #000000;
+  --gradient-button-primary-default:  linear-gradient(180deg, #ededed 0%, #d4d4d4 100%);
+  --gradient-button-primary-hover:    linear-gradient(180deg, #f7f7f7 0%, #ededed 100%);
+  --gradient-button-primary-active:   linear-gradient(180deg, #d4d4d4 0%, #a3a3a3 100%);
 
   /* Disabled primary CTA: dark, low-emphasis fill with readable muted text. */
   --gradient-button-primary-disabled: linear-gradient(
@@ -655,6 +663,7 @@
   --color-input-disabled-foreground:  var(--color-input-disabled-foreground);
   --color-icon-button-disabled-foreground: var(--color-icon-button-disabled-foreground);
   --color-button-primary-disabled-foreground: var(--color-button-primary-disabled-foreground);
+  --color-button-primary-foreground:  var(--color-button-primary-foreground);
 
   --color-text-primary:         var(--color-text-primary);
   --color-text-secondary:       var(--color-text-secondary);

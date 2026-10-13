@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { RiArrowLeftLine, RiArrowRightLine, RiMailLine } from "@remixicon/react";
 import { Announcement } from "@/components/base/announcement/announcement";
@@ -7,7 +9,7 @@ import { Chip } from "@/components/base/badges/chip";
 import { Button } from "@/components/base/buttons/button";
 import { SocialButton } from "@/components/base/social-button/social-button";
 import { Tab, TabList, TabPanel, Tabs } from "@/components/base/tabs/tabs";
-import { Eyebrow, Reveal } from "./App";
+import { Eyebrow, Reveal } from "./ui";
 
 const ACCENT_STEPS = [
   "bg-accent-50", "bg-accent-100", "bg-accent-200", "bg-accent-300",
